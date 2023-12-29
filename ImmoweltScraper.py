@@ -221,7 +221,7 @@ if __name__ == "__main__":
         epilog="Since websites change constantly, this script might not work in the future.",
     )
     required = parser.add_argument_group("required arguments")
-    optional = parser.add_argument_group('optional arguments')
+    optional = parser.add_argument_group("optional arguments")
     required.add_argument(
         "-c", "--city", type=str, help="City to scrape", default="koeln", required=True
     )
@@ -249,13 +249,15 @@ if __name__ == "__main__":
     else:
         raise ValueError("City must only contain alphabetic characters")
 
-    if args.n < 1:
+    if args.num_pages is not None and args.num_pages < 1:
         raise ValueError("Number of pages must be positive")
 
     umlaut_map = {ord("ä"): "ae", ord("ü"): "ue", ord("ö"): "oe", ord("ß"): "ss"}
     city = city.translate(umlaut_map)
 
-    scraper = ImmoweltScraper(city=city, payment_type=args.p, num_pages=args.n)
+    scraper = ImmoweltScraper(
+        city=city, payment_type=args.payment_type, num_pages=args.num_pages
+    )
     scraper.scrape()
     df = scraper.to_dataframe()
-    df.to_csv(f"immowelt_{city}_{args.p}.csv", index=False)
+    df.to_csv(f"immowelt_{city}_{args.payment_type}.csv", index=False)
