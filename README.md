@@ -7,7 +7,7 @@ Navigate to the requirements.txt file and run:
   pip install -r requirements.txt
   ```
 ## Usage
-Run Immoweltsraper.py with the following arguments:
+Run ImmoweltScraper.py with the following arguments:
 ```sh
 options:
   -h, --help            show this help message and exit
