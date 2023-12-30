@@ -210,8 +210,6 @@ class ImmoweltScraper:
             sleep(5)  # sleep to limit amount of requests
 
     def to_dataframe(self):
-        for key in self.data_dict.keys():
-            print(key, len(self.data_dict[key]))
         df = pd.DataFrame(self.data_dict)
         return df.dropna(axis=1, how="all")
 
