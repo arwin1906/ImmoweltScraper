@@ -175,24 +175,22 @@ class ImmoweltScraper:
                 self.keys.append("Link")
                 self.values.append(item)
                 try:
-                    metadata = soup.find_all("app-objectmeta", id="aUebersicht")[0]
+                    metadata = soup.find("app-objectmeta", id="aUebersicht")
                     self.process_metadata(metadata)
                 except Exception as e:
                     print(f"Error occured with metadata: {e}")
                 try:
-                    estate_information = soup.find_all(
-                        "app-estate-object-informations"
-                    )[0]
+                    estate_information = soup.find("app-estate-object-informations")
                     self.process_estate_information(estate_information)
                 except Exception as e:
                     print(f"Error occured with estate information: {e}")
                 try:
-                    price_information = soup.find_all("app-price")[0]
+                    price_information = soup.find("app-price")
                     self.process_price_information(price_information)
                 except Exception as e:
                     print(f"Error occured with price information: {e}")
                 try:
-                    energy_information = soup.find_all("app-energy-certificate")[0]
+                    energy_information = soup.find("app-energy-certificate")
                     self.process_energy_information(energy_information)
                 except Exception as e:
                     print(f"Error occured with energy information: {e}")
