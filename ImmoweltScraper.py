@@ -99,6 +99,8 @@ class ImmoweltScraper:
         return any(c.isdigit() for c in string)
 
     def process_metadata(self, metadata):
+        if metadata is None:
+            return
         # process name
         self.keys.append("Name")
         self.values.append(metadata.find("h1", class_="ng-star-inserted").text)
@@ -208,6 +210,8 @@ class ImmoweltScraper:
             sleep(5)  # sleep to limit amount of requests
 
     def to_dataframe(self):
+        for key in self.data_dict.keys():
+            print(key, len(self.data_dict[key]))
         df = pd.DataFrame(self.data_dict)
         return df.dropna(axis=1, how="all")
 
